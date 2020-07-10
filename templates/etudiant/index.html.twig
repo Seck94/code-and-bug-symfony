@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Etudiants{% endblock %}
+
+{% block body %}
+
+<style>
+.my-custom-scrollbar {
+position: relative;
+height: auto;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
+</style>
+
+
+ {# <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> #}
+<h1 class="text-center text-capitalize mt-2">liste des Etudiants</h1>
+{# <div class="table-wrapper-scroll-y my-custom-scrollbar"> #}
+{# <form method="post" action="/">
+    <div class="mb-2 col-4 d-flex">
+        <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button name="btnSearch"  class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </div>  
+  </form> #}
+
+
+
+{# <div id='scrollZone' style='height:400px;overflow:scroll'> #}
+
+<div class="card card-outline-secondary">
+ 
+<table id="example"class="table table-bordered table-striped table-sm ">
+  
+
+ <thead class="thead-dark">
+<tr>
+
+<th>Nom</th>
+<th>Prenom</th>
+<th>Email</th>
+<th>Telephone</th>
+<th>Date</th>
+<th>Action</th>
+
+</tr>
+</thead>
+
+<tbody>
+{% for etudiant in etudiants %}
+ 
+   <tr>
+   
+   <td>{{etudiant.nom}}</td>
+   <td>{{etudiant.prenom}}</td>
+   <td>{{etudiant.email}}</td>
+   <td>{{etudiant.telephone}}</td>
+   <td>{{etudiant.date|date("m/d/Y")}}</td> 
+   <td>
+   <a class="text-capitalize text-decoration-none" href="{{path('etudiant_update',{'id': etudiant.id})}}" onclick="return confirm('êtes-vous sûr de vouloir modifier l'etudiant');">modifier</a>
+   <a class="text-capitalize text-decoration-none text-danger" href="{{path('etudiant_delete',{'id': etudiant.id})}}" onclick="return confirm('voulez-vous vraiment supprimer l'etudiant');">Supprimer</a>
+   </td>
+   
+  
+   </tr> 
+  
+
+
+{% endfor %}
+ </tbody>
+
+
+</table>
+
+</div>
+{# </div>    #}
+
+{# <div id='scrollZone' style='height:100px;width:600px;overflow:scroll'>
+lorem Le lorem ipsum est, en imprimerie, une suite de mots sans 
+signification utilisée à titre provisoire pour calibrer une mise 
+en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que 
+la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.
+</div> #}
+
+
+
+{% endblock %}
